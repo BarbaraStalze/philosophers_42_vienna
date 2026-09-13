@@ -69,3 +69,9 @@ void	first_meal(t_philo_data *p_data)
 		pthread_mutex_lock(p_data->left_chopstick);
 	}
 }
+
+// Even philosophers start by grabbing the left fork first and then the right,
+// uneven philos grab the right fork first after sleeping almost the amount of
+// time of time_to_eat. The last uneven philosopher in case of an uneven amount
+// of philosophers waits almost twice the time_to_eat until grabbing forks.
+
