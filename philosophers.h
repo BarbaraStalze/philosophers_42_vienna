@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:47:57 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 12:49:38 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/13 13:55:31 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,14 @@ typedef struct s_philo_data
 
 int	initiate_general_data(char **av, t_general_data *data);
 int	initiate_mutexes(t_mutex_thread_data *mt_data, t_general_data *data);
+int	initiate_philosophers(t_mutex_thread_data *mt_data, t_general_data *data);
+
+// cleanups
 void	cleanup(t_mutex_thread_data *mt_data,
 			t_general_data *data);
+void	free_thread_p_data(t_mutex_thread_data *mt_data, t_philo_data *p_data);
+
+// helpers
+int	malloc_and_initialize(void **data, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 12:40:09 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 12:49:15 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/13 13:53:04 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void	close_n_free_mutextes(t_mutex_thread_data *mt_data,
 		mt_data->chopsticks_initialized, data);
 }
 
-static void	close_n_free_mutex_array(pthread_mutex_t *mutex, bool *mutex_initialized,
-            t_general_data *data)
+static void	close_n_free_mutex_array(pthread_mutex_t *mutex,
+				bool *mutex_initialized, t_general_data *data)
 {
     int i;
 
@@ -68,4 +68,27 @@ static void	close_n_free_mutex_array(pthread_mutex_t *mutex, bool *mutex_initial
         free(mutex);
         mutex = NULL;
     }
+}
+
+void	free_thread_p_data(t_mutex_thread_data *mt_data, t_philo_data *p_data)
+{
+	free(p_data);
+	p_data = NULL;
+	free(mt_data->id);
+	mt_data->id = NULL;
+	free(mt_data->thread_created);
+	mt_data->thread_created = NULL;
+}
+
+void	join_threads(t_mutex_thread_data *mt_data, t_general_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_philosophers)
+	{
+		if (mt_data->thread_created == true)
+			pthread_join(mt_data->id[i], NULL);
+		i++;
+	}
 }
