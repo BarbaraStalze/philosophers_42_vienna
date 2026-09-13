@@ -19,7 +19,7 @@ void	*philosopher(void *arg)
 	p_data = (t_philo_data *)arg;
 	if (wait_for_all(p_data))
 		return ;
-	first_meal();
+	first_meal(p_data);
 }
 
 static int	wait_for_all(t_philo_data *p_data)
@@ -46,5 +46,26 @@ static int	wait_for_all(t_philo_data *p_data)
 		if (check_for_end(p_data))
 			return (1);
 		usleep(100);
+	}
+}
+
+void	first_meal(t_philo_data *p_data)
+{
+	if (even_philos(p_data))
+	{
+		pthread_mutex_lock(p_data->left_chopstick);
+		pthread_mutex_lock(p_data->right_chopstick);
+	}
+	else if (uneven_philos_without_last(p_data))
+	{
+		usleep((p_data->data->time_to_die * 1000) - 100);
+		pthread_mutex_lock(p_data->right_chopstick);
+		pthread_mutex_lock(p_data->left_chopstick);
+	}
+	else
+	{
+		usleep((p_data->data->time_to_die * 1000 * 2) - 100);
+		pthread_mutex_lock(p_data->right_chopstick);
+		pthread_mutex_lock(p_data->left_chopstick);
 	}
 }

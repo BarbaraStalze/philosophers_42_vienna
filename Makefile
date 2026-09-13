@@ -7,6 +7,9 @@ SOURCES = main.c \
 		initiate_general_data.c \
 		initiate_mutexes.c \
 		initiate_philosophers.c \
+		philosophers.c \
+		first_meal_ifs.c \
+		flexsleep.c \
 		cleanup.c
 
 OBJFILES = $(SOURCES:.c=.o)
