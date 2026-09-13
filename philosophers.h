@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:47:57 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 13:55:31 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/13 16:23:45 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,24 @@
 #include <limits.h>
 #include <pthread.h>
 #include <sys/time.h>
+#include <stdint.h>
+
+// Output messages
+# define CHOPSTICK	"has taken a fork"
+# define EATING		"is eating"
+# define SLEEPING	"is sleeping"
+# define THINKING	"is thinking"
+# define DEATH		"died"
 
 typedef struct s_general_data
 {
 	int					n_philosophers;
-	long long			time_to_die;
-	long long			time_to_eat;
-	long long			time_to_sleep;
+	int64_t				time_to_die;
+	int64_t				time_to_eat;
+	int64_t				time_to_sleep;
 	int					minimum_meals;
+	int					alive;
+	int64_t				sim_start;
 	bool				someone_died;
 	int					philos_ate_enough;
 	bool				simulation_end;
@@ -56,7 +66,7 @@ typedef struct s_mutex_thread_data
 typedef struct s_philo_data
 {
 	int				id;
-	long long		start_of_last_meal;
+	int64_t			start_of_last_meal;
 	int				times_eaten;
 	pthread_mutex_t	*left_chopstick;
 	pthread_mutex_t	*right_chopstick;
@@ -68,10 +78,11 @@ typedef struct s_philo_data
 	t_general_data	*data;
 }		t_philo_data;
 
-
-int	initiate_general_data(char **av, t_general_data *data);
-int	initiate_mutexes(t_mutex_thread_data *mt_data, t_general_data *data);
-int	initiate_philosophers(t_mutex_thread_data *mt_data, t_general_data *data);
+// general
+int		initiate_general_data(char **av, t_general_data *data);
+int		initiate_mutexes(t_mutex_thread_data *mt_data, t_general_data *data);
+int		initiate_philosophers(t_mutex_thread_data *mt_data, t_general_data *data);
+void	*philosopher(void *arg);
 
 // cleanups
 void	cleanup(t_mutex_thread_data *mt_data,
@@ -79,6 +90,10 @@ void	cleanup(t_mutex_thread_data *mt_data,
 void	free_thread_p_data(t_mutex_thread_data *mt_data, t_philo_data *p_data);
 
 // helpers
-int	malloc_and_initialize(void **data, size_t size);
+int		malloc_and_initialize(void **data, size_t size);
+int64_t	get_time(void);
+int		check_for_end(t_philo_data *p_data);
+int64_t	time_since_start(t_philo_data *p_data);
+void	print_msg(char *msg, t_philo_data *p_data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:06:37 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 13:58:28 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/13 16:24:26 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,15 @@ static int	create_threads(t_mutex_thread_data *mt_data, t_general_data *data,
 			pthread_mutex_lock(&mt_data->print);
 			printf("Error: Thread %d could not be created\n", i + 1);
 			pthread_mutex_unlock(&mt_data->print);
+			pthread_mutex_lock(&mt_data->end);
+			p_data->data->simulation_end = true;
+			pthread_mutex_unlock(&mt_data->end);
 			return (1);
 		}
 		i++;
 	}
 	return (0);
 }
-// Replace with custom print function!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 static void	add_data(t_mutex_thread_data *mt_data, t_general_data *data,
 				t_philo_data *p_data, int i)

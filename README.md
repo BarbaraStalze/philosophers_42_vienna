@@ -56,7 +56,7 @@ Which timestamp (in milliseconds) which philosopher...
 
 
 ### Peers
-I talked to Kian and Myron about their approaches. Kian told me all he knows, also about the sentence of "you should protect each fork’s state with a mutex" in the subject and how in the french version it's more a "must" which seems a translation issue, but how apparently lots of people on campus wouldn't count it as failure if you use atomics instead. Also they told me that using a string with bools that shows if a fork is used would be counted as communication between philosophers which isn't allowed.
+I talked to Kian and Myron about their approaches. They told me that using a string with bools that shows if a fork is used would be counted as communication between philosophers which isn't allowed. Kian inspired my waiting_for_all. Felix inspired my way of not printing messages after someone died. Stefan inspred me in the way how he has a flexible amount of sleep depending on how far away from the time to change state is and his neat way of using defines for the messages.
 
 ### AI Usage Statement
 - discussion of concepts and ideas
