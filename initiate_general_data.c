@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 11:53:10 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 12:02:50 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/13 12:10:02 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	initiate_general_data(char **av, t_general_data *data)
 	int j;
 
 	i = 1;
+	memset(data, 0, sizeof(t_general_data));
 	while (av[i])
 	{
 		j = 0;

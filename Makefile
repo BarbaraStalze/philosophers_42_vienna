@@ -4,9 +4,10 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -pthread
 SOURCES = main.c \
-		philosophers.c \
-		helpers.c
-		
+		initiate_general_data.c \
+		initiate_mutexes.c \
+		cleanup.c
+
 OBJFILES = $(SOURCES:.c=.o)
 
 all : $(NAME)
