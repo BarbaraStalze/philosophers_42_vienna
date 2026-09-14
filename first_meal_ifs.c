@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 17:46:47 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 17:50:47 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:38:05 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	even_philos(t_philo_data *p_data)
 
 int	uneven_philos_without_last(t_philo_data *p_data)
 {
-	if (p_data->data->n_philosophers % 2 == 0 && p_data->id % 2 == 1
-			|| (p_data->data->n_philosophers % 2 == 1
-		&& p_data->id % 2 == 1
-		&& p_data->id != p_data->data->n_philosophers))
+	if ((p_data->data->n_philosophers % 2 == 0 && p_data->id % 2 == 1)
+		|| (p_data->data->n_philosophers % 2 == 1
+			&& p_data->id % 2 == 1
+			&& p_data->id != p_data->data->n_philosophers))
 		return (1);
 	return (0);
 }

@@ -11,6 +11,7 @@ SOURCES = main.c \
 		first_meal_ifs.c \
 		flexsleep.c \
 		eat_sleep_think.c \
+		helpers.c \
 		cleanup.c
 
 OBJFILES = $(SOURCES:.c=.o)

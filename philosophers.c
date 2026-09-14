@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                      :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 15:02:17 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:37:00 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,23 @@ static int	first_grab_wait(t_philo_data *p_data, bool last);
 
 void	*philosopher(void *arg)
 {
-	t_philo_data *p_data;
+	t_philo_data	*p_data;
 
 	p_data = (t_philo_data *)arg;
 	if (wait_for_all(p_data))
-		return ;
+		return (NULL);
 	if (first_grab(p_data))
-		return ;
+		return (NULL);
 	while (42)
 	{
 		if (eating(p_data))
-			return ;
+			return (NULL);
 		if (sleeping(p_data))
-			return ;
+			return (NULL);
 		if (thinking(p_data))
-			return ;
+			return (NULL);
 	}
+	return (NULL);
 }
 
 static int	wait_for_all(t_philo_data *p_data)
@@ -72,14 +73,14 @@ static int	first_grab(t_philo_data *p_data)
 	}
 	else if (uneven_philos_without_last(p_data))
 	{
-		if (first_meal_wait(p_data, false))
+		if (first_grab_wait(p_data, false))
 			return (1);
 		pthread_mutex_lock(p_data->right_chopstick);
 		pthread_mutex_lock(p_data->left_chopstick);
 	}
 	else
 	{
-		if (first_meal_wait(p_data, true))
+		if (first_grab_wait(p_data, true))
 			return (1);
 		pthread_mutex_lock(p_data->right_chopstick);
 		pthread_mutex_lock(p_data->left_chopstick);
@@ -102,10 +103,11 @@ static int	first_grab_wait(t_philo_data *p_data, bool last)
 		remaining_time = p_data->data->time_to_eat * 2;
 	while (remaining_time > 1)
 	{
-		if (check_for_end)
+		if (check_for_end(p_data))
 			return (1);
 		flexsleep(remaining_time, p_data->data->sim_start);
-		remaining_time = p_data->data->sim_start + p_data->data->time_to_eat - get_time();
+		remaining_time = p_data->data->sim_start + p_data->data->time_to_eat
+			- get_time();
 	}
 	return (0);
 }

@@ -6,22 +6,22 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 12:40:09 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 13:53:04 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:23:55 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 static void	close_n_free_mutextes(t_mutex_thread_data *mt_data,
-			t_general_data *data);
-static void	close_n_free_mutex_array(pthread_mutex_t *mutex, bool *mutex_initialized,
-            t_general_data *data);
+				t_general_data *data);
+static void	close_n_free_mutex_array(pthread_mutex_t *mutex,
+				bool *mutex_initialized, t_general_data *data);
 
 void	cleanup(t_mutex_thread_data *mt_data,
-			t_general_data *data)
+			t_general_data *data, t_philo_data *p_data)
 {
 	close_n_free_mutextes(mt_data, data);
-	end_threads(mt_data, data);
+	free_thread_p_data(mt_data, p_data);
 }
 
 static void	close_n_free_mutextes(t_mutex_thread_data *mt_data,
@@ -37,16 +37,16 @@ static void	close_n_free_mutextes(t_mutex_thread_data *mt_data,
 		pthread_mutex_destroy(&mt_data->ate_enough);
 	if (mt_data->end_initailized == true)
 		pthread_mutex_destroy(&mt_data->end);
-    close_n_free_mutex_array(mt_data->chopsticks,
+	close_n_free_mutex_array(mt_data->chopsticks,
 		mt_data->chopsticks_initialized, data);
 }
 
 static void	close_n_free_mutex_array(pthread_mutex_t *mutex,
 				bool *mutex_initialized, t_general_data *data)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	if (mutex && mutex_initialized)
 	{
 		while (i < data->n_philosophers)
@@ -56,18 +56,18 @@ static void	close_n_free_mutex_array(pthread_mutex_t *mutex,
 			i++;
 		}
 		free(mutex_initialized);
-        mutex_initialized = NULL;
+		mutex_initialized = NULL;
 	}
-    if (mutex_initialized)
-    {
-        free(mutex_initialized);
-        mutex_initialized = NULL;
-    }
-    if (mutex)
-    {
-        free(mutex);
-        mutex = NULL;
-    }
+	if (mutex_initialized)
+	{
+		free(mutex_initialized);
+		mutex_initialized = NULL;
+	}
+	if (mutex)
+	{
+		free(mutex);
+		mutex = NULL;
+	}
 }
 
 void	free_thread_p_data(t_mutex_thread_data *mt_data, t_philo_data *p_data)
@@ -87,7 +87,7 @@ void	join_threads(t_mutex_thread_data *mt_data, t_general_data *data)
 	i = 0;
 	while (i < data->n_philosophers)
 	{
-		if (mt_data->thread_created == true)
+		if (mt_data->thread_created[i] == true)
 			pthread_join(mt_data->id[i], NULL);
 		i++;
 	}

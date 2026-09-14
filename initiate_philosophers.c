@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:06:37 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 16:24:26 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:26:05 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ static int	create_threads(t_mutex_thread_data *mt_data, t_general_data *data,
 static void	add_data(t_mutex_thread_data *mt_data, t_general_data *data,
 				t_philo_data *p_data, int i);
 
-int	initiate_philosophers(t_mutex_thread_data *mt_data, t_general_data *data)
+int	initiate_philosophers(t_mutex_thread_data *mt_data, t_general_data *data,
+		t_philo_data *p_data)
 {
-	t_philo_data	*p_data;
-
 	p_data = NULL;
-	if (malloc_and_initialize((void **)(&p_data), sizeof(t_philo_data) *
-		data->n_philosophers))
+	if (malloc_and_initialize((void **)(&p_data), sizeof(t_philo_data)
+		* data->n_philosophers))
 		return (1);
-	if (malloc_and_initialize((void **)(&mt_data->id), sizeof(pthread_t) *
-		data->n_philosophers))
+	if (malloc_and_initialize((void **)(&mt_data->id), sizeof(pthread_t)
+		* data->n_philosophers))
 		return (free_thread_p_data(mt_data, p_data), 1);
 	if (malloc_and_initialize((void **)(&mt_data->thread_created), sizeof(bool)
 		* data->n_philosophers))
@@ -41,12 +40,13 @@ static int	create_threads(t_mutex_thread_data *mt_data, t_general_data *data,
 				t_philo_data *p_data)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < data->n_philosophers)
 	{
 		add_data(mt_data, data, p_data, i);
-		if (!pthread_create(&mt_data->id[i], NULL, philosopher, (void *)&p_data[i]))
+		if (!pthread_create(&mt_data->id[i], NULL, philosopher,
+				(void *)&p_data[i]))
 			mt_data->thread_created[i] = true;
 		if (mt_data->thread_created[i] == false)
 		{

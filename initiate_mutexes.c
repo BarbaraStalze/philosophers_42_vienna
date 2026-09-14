@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 12:10:30 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 12:33:42 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:24:23 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	create_mutex(pthread_mutex_t *mutex, bool *initialized);
 static int	create_chopsticks(t_mutex_thread_data *mt_data,
-	t_general_data *data);
+				t_general_data *data);
 
 int	initiate_mutexes(t_mutex_thread_data *mt_data, t_general_data *data)
 {
@@ -46,15 +46,15 @@ static int	create_chopsticks(t_mutex_thread_data *mt_data,
 	t_general_data *data)
 {
 	int	i;
-	
-	mt_data->chopsticks_initialized = malloc(sizeof(bool) *
-		data->n_philosophers);
+
+	mt_data->chopsticks_initialized = malloc(sizeof(bool)
+			* data->n_philosophers);
 	if (!mt_data->chopsticks_initialized)
 		return (printf("Error: Malloc failed"), 1);
-	memset(mt_data->chopsticks_initialized, 0, sizeof(bool) *
-		data->n_philosophers);
-	mt_data->chopsticks = malloc(sizeof(pthread_mutex_t) *
-		data->n_philosophers);
+	memset(mt_data->chopsticks_initialized, 0, sizeof(bool)
+		* data->n_philosophers);
+	mt_data->chopsticks = malloc(sizeof(pthread_mutex_t)
+			* data->n_philosophers);
 	if (!mt_data->chopsticks)
 		return (printf("Error: Malloc failed"), 1);
 	i = 0;
@@ -65,5 +65,5 @@ static int	create_chopsticks(t_mutex_thread_data *mt_data,
 		mt_data->chopsticks_initialized[i] = true;
 		i++;
 	}
-    return (0);
+	return (0);
 }
