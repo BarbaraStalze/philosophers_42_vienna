@@ -19,7 +19,8 @@ void	*philosopher(void *arg)
 	p_data = (t_philo_data *)arg;
 	if (wait_for_all(p_data))
 		return ;
-	first_meal(p_data);
+	if (first_meal(p_data))
+		return ;
 }
 
 static int	wait_for_all(t_philo_data *p_data)
@@ -49,7 +50,7 @@ static int	wait_for_all(t_philo_data *p_data)
 	}
 }
 
-void	first_meal(t_philo_data *p_data)
+static int	first_meal(t_philo_data *p_data)
 {
 	if (even_philos(p_data))
 	{
@@ -58,16 +59,19 @@ void	first_meal(t_philo_data *p_data)
 	}
 	else if (uneven_philos_without_last(p_data))
 	{
-		usleep((p_data->data->time_to_die * 1000) - 100);
+		if (first_meal_wait(p_data, false))
+			return (1);
 		pthread_mutex_lock(p_data->right_chopstick);
 		pthread_mutex_lock(p_data->left_chopstick);
 	}
 	else
 	{
-		usleep((p_data->data->time_to_die * 1000 * 2) - 100);
+		if (first_meal_wait(p_data, true))
+			return (1);
 		pthread_mutex_lock(p_data->right_chopstick);
 		pthread_mutex_lock(p_data->left_chopstick);
 	}
+	return (0);
 }
 
 // Even philosophers start by grabbing the left fork first and then the right,
@@ -75,3 +79,20 @@ void	first_meal(t_philo_data *p_data)
 // time of time_to_eat. The last uneven philosopher in case of an uneven amount
 // of philosophers waits almost twice the time_to_eat until grabbing forks.
 
+int	first_meal_wait(t_philo_data *p_data, bool last)
+{
+	int64_t	remaining_time;
+
+	if (last == false)
+		remaining_time = p_data->data->time_to_eat;
+	else
+		remaining_time = p_data->data->time_to_eat * 2;
+	while (remaining_time > 1)
+	{
+		if (check_for_end)
+			return (1);
+		flexsleep(remaining_time, p_data->data->sim_start);
+		remaining_time = p_data->data->sim_start + p_data->data->time_to_eat - get_time();
+	}
+	return (0);
+}
