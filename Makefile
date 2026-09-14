@@ -10,6 +10,7 @@ SOURCES = main.c \
 		philosophers.c \
 		first_meal_ifs.c \
 		flexsleep.c \
+		eat_sleep_think.c \
 		cleanup.c
 
 OBJFILES = $(SOURCES:.c=.o)

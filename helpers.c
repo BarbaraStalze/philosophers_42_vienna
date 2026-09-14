@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:15:16 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 16:19:02 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 10:59:53 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,19 @@ void	print_msg(char *msg, t_philo_data *p_data)
 		printf("%d %d %s\n", time, p_data->id, msg);
 		if (msg == DEATH)
 			someone_died = true;
+		pthread_mutex_unlock(p_data->print);
 	}
-	pthread_mutex_unlock(p_data->print);
+}
+
+int	check_for_death(t_philo_data *p_data)
+{
+	if (p_data->start_of_last_meal + p_data->data->time_to_die <= get_time())
+	{
+		print_msg(DEATH, p_data);
+		pthread_mutex_lock(p_data->died);
+		p_data->data->someone_died = true;
+		pthread_mutex_unlock(p_data->died);
+		return (1);
+	}
+	return (0);
 }

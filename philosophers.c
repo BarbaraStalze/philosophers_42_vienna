@@ -12,6 +12,10 @@
 
 #include "philosophers.h"
 
+static int	wait_for_all(t_philo_data *p_data);
+static int	first_grab(t_philo_data *p_data);
+static int	first_grab_wait(t_philo_data *p_data, bool last);
+
 void	*philosopher(void *arg)
 {
 	t_philo_data *p_data;
@@ -19,8 +23,17 @@ void	*philosopher(void *arg)
 	p_data = (t_philo_data *)arg;
 	if (wait_for_all(p_data))
 		return ;
-	if (first_meal(p_data))
+	if (first_grab(p_data))
 		return ;
+	while (42)
+	{
+		if (eating(p_data))
+			return ;
+		if (sleeping(p_data))
+			return ;
+		if (thinking(p_data))
+			return ;
+	}
 }
 
 static int	wait_for_all(t_philo_data *p_data)
@@ -50,7 +63,7 @@ static int	wait_for_all(t_philo_data *p_data)
 	}
 }
 
-static int	first_meal(t_philo_data *p_data)
+static int	first_grab(t_philo_data *p_data)
 {
 	if (even_philos(p_data))
 	{
@@ -79,7 +92,7 @@ static int	first_meal(t_philo_data *p_data)
 // time of time_to_eat. The last uneven philosopher in case of an uneven amount
 // of philosophers waits almost twice the time_to_eat until grabbing forks.
 
-int	first_meal_wait(t_philo_data *p_data, bool last)
+static int	first_grab_wait(t_philo_data *p_data, bool last)
 {
 	int64_t	remaining_time;
 

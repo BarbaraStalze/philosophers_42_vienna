@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:47:57 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/13 17:52:43 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 12:53:39 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int		initiate_general_data(char **av, t_general_data *data);
 int		initiate_mutexes(t_mutex_thread_data *mt_data, t_general_data *data);
 int		initiate_philosophers(t_mutex_thread_data *mt_data, t_general_data *data);
 void	*philosopher(void *arg);
+int		eating(t_philo_data *p_data);
+int		sleeping(t_philo_data *p_data);
+int		thinking(t_philo_data *p_data);
 
 // cleanups
 void	cleanup(t_mutex_thread_data *mt_data,
@@ -95,9 +98,12 @@ int64_t	get_time(void);
 int		check_for_end(t_philo_data *p_data);
 int64_t	time_since_start(t_philo_data *p_data);
 void	print_msg(char *msg, t_philo_data *p_data);
+int		check_for_death(t_philo_data *p_data);
+void	flexsleep(int64_t max_phase_length, int64_t start_of_phase);
 
 // if conditions
 int		even_philos(t_philo_data *p_data);
 int		uneven_philos_without_last(t_philo_data *p_data);
+void	join_threads(t_mutex_thread_data *mt_data, t_general_data *data);
 
 #endif
