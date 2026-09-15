@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/15 16:26:14 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/15 16:33:28 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	thinking(t_philo_data *p_data)
 
 static int	try_to_pick_up_chopsticks(t_philo_data *p_data)
 {
-	if (p_data->data->n_philosophers % 2 == 0)
+	if (p_data->id % 2 == 0)
 	{
 		if (grab_chopsticks_even(p_data))
 			return (1);

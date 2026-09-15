@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/15 15:46:02 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/15 16:39:00 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	*philosopher(void *arg)
 	p_data = (t_philo_data *)arg;
 	if (wait_for_all(p_data))
 		return (NULL);
-	if (p_data->id % 2 != 0)
-		usleep(200);
+	// if (p_data->id % 2 != 0)
+	// 	usleep(100);
 	if (first_grab(p_data))
 		return (NULL);
 	while (42)
