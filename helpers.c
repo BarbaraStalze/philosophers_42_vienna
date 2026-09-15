@@ -6,11 +6,11 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:15:16 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:32:02 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:44:59 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 int	malloc_and_initialize(void **data, size_t size)
 {

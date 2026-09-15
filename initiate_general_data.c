@@ -6,11 +6,11 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 11:53:10 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:18:10 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/15 10:08:27 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 static int	add_args(char **av, t_general_data *data);
 static int	ft_isdigit(int c);

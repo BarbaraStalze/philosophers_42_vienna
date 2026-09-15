@@ -6,11 +6,11 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:39:06 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:44:59 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 static int	allert_waiting(t_philo_data *p_data, int64_t phase_length,
 				int64_t phase_start);

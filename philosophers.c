@@ -6,11 +6,11 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:37:00 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:44:59 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 static int	wait_for_all(t_philo_data *p_data);
 static int	first_grab(t_philo_data *p_data);

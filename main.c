@@ -6,11 +6,11 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:48:17 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:15:04 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:44:59 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 static void	monitor(t_general_data *data, t_mutex_thread_data *mt_data);
 

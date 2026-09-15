@@ -6,11 +6,11 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 17:46:47 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:38:05 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/14 18:44:59 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 int	even_philos(t_philo_data *p_data)
 {

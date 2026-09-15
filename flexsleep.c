@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 void	flexsleep(int64_t max_phase_length, int64_t start_of_phase)
 {

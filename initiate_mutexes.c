@@ -6,11 +6,11 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 12:10:30 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:24:23 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/15 10:35:42 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 static int	create_mutex(pthread_mutex_t *mutex, bool *initialized);
 static int	create_chopsticks(t_mutex_thread_data *mt_data,
@@ -65,5 +65,5 @@ static int	create_chopsticks(t_mutex_thread_data *mt_data,
 		mt_data->chopsticks_initialized[i] = true;
 		i++;
 	}
-	return (0);
+	return (0);	
 }
