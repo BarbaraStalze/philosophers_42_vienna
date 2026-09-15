@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/14 18:44:59 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/15 15:46:02 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	*philosopher(void *arg)
 	p_data = (t_philo_data *)arg;
 	if (wait_for_all(p_data))
 		return (NULL);
+	if (p_data->id % 2 != 0)
+		usleep(200);
 	if (first_grab(p_data))
 		return (NULL);
 	while (42)
@@ -39,51 +41,53 @@ void	*philosopher(void *arg)
 
 static int	wait_for_all(t_philo_data *p_data)
 {
-	int	check;
-
-	check = 0;
-	pthread_mutex_lock(p_data->start);
+	pthread_mutex_lock(&p_data->data->start_o_end);
 	p_data->data->alive++;
 	if (p_data->data->alive == p_data->data->n_philosophers)
 		p_data->data->sim_start = get_time();
-	pthread_mutex_unlock(p_data->start);
-	while (1)
+	pthread_mutex_unlock(&p_data->data->start_o_end);
+	while (42)
 	{
-		pthread_mutex_lock(p_data->start);
+		pthread_mutex_lock(&p_data->data->start_o_end);
 		if (p_data->data->alive == p_data->data->n_philosophers)
 		{
-			p_data->start_of_last_meal = p_data->data->sim_start;
-			check = 1;
+			pthread_mutex_unlock(&p_data->data->start_o_end);
+			break ;
 		}
-		pthread_mutex_unlock(p_data->start);
-		if (check == 1)
-			return (0);
+		// {
+		// 	p_data->start_of_last_meal = p_data->data->sim_start;
+		// 	return (pthread_mutex_unlock(&p_data->data->start_o_end), 0);
+		// }
+		pthread_mutex_unlock(&p_data->data->start_o_end);
 		if (check_for_end(p_data))
 			return (1);
 		usleep(100);
 	}
+	p_data->start_of_last_meal = p_data->data->sim_start;
+	return (0);
+	
 }
 
 static int	first_grab(t_philo_data *p_data)
 {
 	if (even_philos(p_data))
 	{
-		pthread_mutex_lock(p_data->left_chopstick);
-		pthread_mutex_lock(p_data->right_chopstick);
+		if (grab_chopsticks_even(p_data))
+			return (1);
 	}
 	else if (uneven_philos_without_last(p_data))
 	{
 		if (first_grab_wait(p_data, false))
 			return (1);
-		pthread_mutex_lock(p_data->right_chopstick);
-		pthread_mutex_lock(p_data->left_chopstick);
+		if (grab_chopsticks_uneven(p_data))
+			return (1);
 	}
 	else
 	{
 		if (first_grab_wait(p_data, true))
 			return (1);
-		pthread_mutex_lock(p_data->right_chopstick);
-		pthread_mutex_lock(p_data->left_chopstick);
+		if (grab_chopsticks_uneven(p_data))
+			return (1);
 	}
 	return (0);
 }
