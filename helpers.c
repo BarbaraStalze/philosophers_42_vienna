@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:15:16 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/16 11:05:36 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 15:32:08 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int64_t	time_since_start(t_philo_data *p_data)
 
 int	print_msg(char *msg, t_philo_data *p_data)
 {
-	usleep(100);
+	//usleep(100);
 	pthread_mutex_lock(&p_data->data->start_o_end);
 	if (p_data->data->simulation_end == true)
 		return (pthread_mutex_unlock(&p_data->data->start_o_end), 1);

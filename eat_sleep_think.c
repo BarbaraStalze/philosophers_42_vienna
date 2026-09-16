@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/16 11:41:21 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 15:49:16 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,18 @@ int	sleeping(t_philo_data *p_data)
 	return (0);
 }
 
-int	calc_think_time(t_general_data *data, t_philo_data *p_data)
+int	calc_think_time(t_general_data *data, t_philo_data *p_data, int64_t	remaining)
 {
-	int64_t	elapsed;
-	int64_t	remaining;
+	//int64_t	elapsed;
 	int64_t	think_time;
 
-	elapsed = get_time() - p_data->start_of_last_meal;
-	remaining = data->time_to_die - elapsed;
-	if (remaining < 1)
-		return (100);
-	if (data->time_to_sleep >= data->time_to_eat)
-		return (100);
+	(void)p_data;
+	// elapsed = get_time() - p_data->start_of_last_meal;
+	// remaining = data->time_to_die - elapsed;
 	think_time = data->time_to_eat - data->time_to_sleep;
-	if (think_time > remaining / 2)
-		return (remaining / 2);
-	else
+	if (think_time <= 0)
 		return (100);
+	return (((think_time + remaining) / 2) * 1000 + 100);
 }
 
 int	thinking(t_philo_data *p_data)
@@ -82,7 +77,7 @@ int	thinking(t_philo_data *p_data)
 	chill_time = time_left;
 	if (time_left > 0)
 	{
-		usleep(calc_think_time(p_data->data, p_data));
+		usleep(calc_think_time(p_data->data, p_data, time_left));
 	}
 	if (try_to_pick_up_chopsticks(p_data))
 		return (1);

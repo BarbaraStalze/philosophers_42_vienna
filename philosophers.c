@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/16 10:46:00 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 15:25:23 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ static int	first_grab(t_philo_data *p_data)
 		if (grab_chopsticks_even(p_data))
 			return (1);
 	}
-	else if (uneven_philos_without_last(p_data))
-	{
-		if (first_grab_wait(p_data, false))
-			return (1);
-		if (grab_chopsticks_uneven(p_data))
-			return (1);
-	}
+	// else if (uneven_philos_without_last(p_data))
+	// {
+	// 	if (first_grab_wait(p_data, false))
+	// 		return (1);
+	// 	if (grab_chopsticks_uneven(p_data))
+	// 		return (1);
+	// }
 	else
 	{
-		if (first_grab_wait(p_data, true))
+		if (first_grab_wait(p_data, false))
 			return (1);
 		if (grab_chopsticks_uneven(p_data))
 			return (1);
@@ -101,12 +101,12 @@ static int	first_grab_wait(t_philo_data *p_data, bool last)
 {
 	int64_t	remaining_time;
 
-	if (last == false)
-		remaining_time = p_data->data->time_to_eat;
-	else
-	{
-		remaining_time = p_data->data->time_to_eat * 2;
-	}
+	(void)last;
+	remaining_time = p_data->data->time_to_eat / 2;
+	// else
+	// {
+	// 	remaining_time = p_data->data->time_to_eat * 2;
+	// }
 	while (remaining_time > 1)
 	{
 		if (check_for_end(p_data))
