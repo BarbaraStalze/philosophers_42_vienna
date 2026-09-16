@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/16 15:25:23 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 16:11:45 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 static int	wait_for_all(t_philo_data *p_data);
 static int	first_grab(t_philo_data *p_data);
 static int	first_grab_wait(t_philo_data *p_data, bool last);
+void	lonely_fucker(t_philo_data *p_data);
 
 void	*philosopher(void *arg)
 {
 	t_philo_data	*p_data;
 
 	p_data = (t_philo_data *)arg;
+	if (p_data->data->n_philosophers == 1)
+		return (lonely_fucker(p_data), NULL);
 	if (wait_for_all(p_data))
 		return (NULL);
 	// if (p_data->id % 2 != 0)
@@ -37,6 +40,19 @@ void	*philosopher(void *arg)
 			return (NULL);
 	}
 	return (NULL);
+}
+
+void	lonely_fucker(t_philo_data *p_data)
+{
+	pthread_mutex_lock(&p_data->data->start_o_end);
+	p_data->data->sim_start = get_time();
+	p_data->start_of_last_meal = p_data->data->sim_start;
+	p_data->data->alive++;
+	pthread_mutex_unlock(&p_data->data->start_o_end);
+	pthread_mutex_lock(&p_data->chopstick);
+	print_msg(CHOPSTICK, p_data);
+	pthread_mutex_unlock(&p_data->chopstick);
+	usleep((p_data->data->time_to_die + 100) * 1000);
 }
 
 static int	wait_for_all(t_philo_data *p_data)

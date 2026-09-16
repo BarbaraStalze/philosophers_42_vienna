@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:48:17 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/16 15:46:09 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 16:11:23 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(int ac, char **av)
 static void	monitor(t_general_data *data, t_philo_data *p_data)
 {
 	int	i;
-
 
 	while (42)
 	{
