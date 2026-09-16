@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/15 16:39:00 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 10:46:00 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ static int	first_grab_wait(t_philo_data *p_data, bool last)
 	if (last == false)
 		remaining_time = p_data->data->time_to_eat;
 	else
+	{
 		remaining_time = p_data->data->time_to_eat * 2;
+	}
 	while (remaining_time > 1)
 	{
 		if (check_for_end(p_data))

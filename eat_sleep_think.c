@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/15 16:33:28 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 11:12:47 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ int	thinking(t_philo_data *p_data)
 	start_of_thinking = get_time();
 	if (print_msg(THINKING, p_data))
 		return (1);
-	time_left = p_data->data->time_to_die - (2 * p_data->data->time_to_eat)
-		- p_data->data->time_to_sleep;
-	chill_time = time_left - 5;
+	time_left = p_data->data->time_to_die - (get_time() - p_data->start_of_last_meal);
+	chill_time = time_left - 2;
 	if (chill_time > 0)
 	{
 		if (allert_waiting(p_data, time_left, start_of_thinking))

@@ -24,7 +24,7 @@ void	flexsleep(int64_t max_phase_length, int64_t start_of_phase)
 	if (remaining_time > 500)
 		usleep(400000);
 	else if (remaining_time > 50)
-		usleep(remaining_time * 1000 - 5000);
+		usleep(remaining_time / 2);
 	else
 		usleep(100);
 }
