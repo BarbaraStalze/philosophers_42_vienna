@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/17 12:41:45 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/17 13:47:37 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	try_to_pick_up_chopsticks(t_philo_data *p_data);
 
 int	eating(t_philo_data *p_data)
 {
+	if (get_time() - p_data->start_of_last_meal >= p_data->data->time_to_die)
+		usleep(500);
 	pthread_mutex_lock(&p_data->data->start_o_end);
 	p_data->start_of_last_meal = get_time();
 	pthread_mutex_unlock(&p_data->data->start_o_end);
@@ -82,8 +84,6 @@ int	thinking(t_philo_data *p_data)
 		// else
 			usleep(calc_think_time(p_data->data, p_data, time_left));
 	}
-	// if (get_time() - p_data->start_of_last_meal >= p_data->data->time_to_die)
-	// 	usleep(500);
 	if (try_to_pick_up_chopsticks(p_data))
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:48:17 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/17 12:40:48 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/17 13:44:32 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ static void	monitor(t_general_data *data, t_philo_data *p_data)
 			pthread_mutex_unlock(&data->start_o_end);
 			i++;
 		}
-		usleep(500);
+		usleep(50);
 	}
 }
