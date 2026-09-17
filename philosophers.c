@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/16 16:11:45 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/16 17:26:28 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	wait_for_all(t_philo_data *p_data);
 static int	first_grab(t_philo_data *p_data);
 static int	first_grab_wait(t_philo_data *p_data, bool last);
-void	lonely_fucker(t_philo_data *p_data);
+static void	lonely_fucker(t_philo_data *p_data);
 
 void	*philosopher(void *arg)
 {
@@ -26,8 +26,6 @@ void	*philosopher(void *arg)
 		return (lonely_fucker(p_data), NULL);
 	if (wait_for_all(p_data))
 		return (NULL);
-	// if (p_data->id % 2 != 0)
-	// 	usleep(100);
 	if (first_grab(p_data))
 		return (NULL);
 	while (42)
@@ -42,7 +40,7 @@ void	*philosopher(void *arg)
 	return (NULL);
 }
 
-void	lonely_fucker(t_philo_data *p_data)
+static void	lonely_fucker(t_philo_data *p_data)
 {
 	pthread_mutex_lock(&p_data->data->start_o_end);
 	p_data->data->sim_start = get_time();

@@ -14,17 +14,15 @@
 
 void	flexsleep(int64_t max_phase_length, int64_t start_of_phase)
 {
-	int64_t	curr_time;
 	int64_t	end_of_phase;
 	int64_t	remaining_time;
 
-	curr_time = get_time();
 	end_of_phase = start_of_phase + max_phase_length;
-	remaining_time = end_of_phase - curr_time;
+	remaining_time = end_of_phase - get_time();
 	if (remaining_time > 500)
 		usleep(400000);
 	else if (remaining_time > 50)
-		usleep(remaining_time / 2);
+		usleep((remaining_time / 2));
 	else
 		usleep(100);
 }
