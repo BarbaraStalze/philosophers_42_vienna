@@ -12,17 +12,17 @@
 
 #include "philo.h"
 
-void	flexsleep(int64_t max_phase_length, int64_t start_of_phase)
+void	flexsleep(int64_t remaining_phase_length, int64_t start_of_phase)
 {
 	int64_t	end_of_phase;
 	int64_t	remaining_time;
 
-	end_of_phase = start_of_phase + max_phase_length;
+	end_of_phase = start_of_phase + remaining_phase_length;
 	remaining_time = end_of_phase - get_time();
 	if (remaining_time > 500)
 		usleep(400000);
-	else if (remaining_time > 50)
-		usleep((remaining_time / 2));
+	else if (remaining_time > 100)
+		usleep((remaining_time / 2) * 1000);
 	else
 		usleep(100);
 }
