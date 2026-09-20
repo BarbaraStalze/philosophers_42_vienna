@@ -6,14 +6,14 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:48:17 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/20 09:51:59 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/20 10:44:11 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	monitor(t_general_data *data, t_philo_data *p_data);
-static void	wait_for_philos(t_general_data *data, t_philo_data *p_data);
+static void	wait_for_philos(t_general_data *data);
 
 int	main(int ac, char **av)
 {
@@ -45,7 +45,7 @@ static void	monitor(t_general_data *data, t_philo_data *p_data)
 {
 	int	i;
 
-	wait_for_philos(data, p_data);
+	wait_for_philos(data);
 	while (42)
 	{
 		i = -1;
@@ -70,7 +70,7 @@ static void	monitor(t_general_data *data, t_philo_data *p_data)
 	}
 }
 
-static void	wait_for_philos(t_general_data *data, t_philo_data *p_data)
+static void	wait_for_philos(t_general_data *data)
 {
 	while (42)
 	{
