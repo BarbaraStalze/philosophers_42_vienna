@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/18 15:31:23 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/20 11:50:05 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	allert_waiting(t_philo_data *p_data, int64_t phase_length,
 				int64_t phase_start);
-static int	try_to_pick_up_chopsticks(t_philo_data *p_data);
 
 int	eating(t_philo_data *p_data)
 {

@@ -14,7 +14,7 @@ The project tought me about threads, data races, context switching and mutexes.
 The first and last philosopher sit next to each other. Also the first sits next to the second the second next to the third and so on (if there are more than 3 of course).
 The message of the death of a philosopher appears maximum 10 milliseconds after his actual death.
 There is a separate thread for each philosopher. The monitor watches from the main thread.
-Mutexes are used in order to avoid data races and mixed output messages.
+Mutexes are used as chopsticks and in order to avoid data races and mixed output messages.
 In order to avoid a deadlock (each philosopher holding one chopstick and all starving) each oddly numbered philosopher takes first the chopsick to his left and then the one to his right. Each even philospher first takes the one to his right. Also on simulation start the even philosophers start eating first. That creates a staggering. Uneven go second and the first philosopher eats third in case of uneven numbers of philosophers.
 
 ## Instructions
@@ -41,7 +41,7 @@ If the minimum number of how many time a philosopher must eat isn't specified th
 ### Output
 The program will write to the standard output:
 Which timestamp (in milliseconds) which philosopher... 
-- has taken a fork
+- has taken a fork (subject makes me use the word fork but chopsticks make more sense - one needs two in order to be able to eat)
 - starts eating
 - starts sleeping
 - starts thinking
@@ -57,13 +57,16 @@ Which timestamp (in milliseconds) which philosopher...
 - pthread_join
 - pthread_mutex_destroy
 - pthread_mutex_lock
-- [gettimeofday on geeksforgeeks] (https://www.geeksforgeeks.org/c/measure-execution-time-with-high-precision-in-c-c/)
-- [pthread functions on geeksforgeeks] (https://www.geeksforgeeks.org/c/thread-functions-in-c-c/)
-- [Mutex lock for Linux Thread Synchronization] (https://www.geeksforgeeks.org/linux-unix/mutex-lock-for-linux-thread-synchronization/)
+#### Online resources:
+- [gettimeofday on geeksforgeeks](https://www.geeksforgeeks.org/c/measure-execution-time-with-high-precision-in-c-c/)
+- [pthread functions on geeksforgeeks](https://www.geeksforgeeks.org/c/thread-functions-in-c-c/)
+- [Mutex lock for Linux Thread Synchronization](https://www.geeksforgeeks.org/linux-unix/mutex-lock-for-linux-thread-synchronization/)
 - [Usleep in Linux](https://linuxvox.com/blog/linux-usleep/)
 - [Using gettimeofday for Computing Execution Time](https://devgex.com/en/article/00035289)
+#### For testing:
 - [42philogramm](https://github.com/sugoidesune/42philogramm)
 - [Philosophers Visualizer](https://rom98759.github.io/Philosophers-visualizer/)
+- [42-philosophers-tester](https://github.com/dantonik/42-philosophers-tester)
 
 ### Peers
 The following concepts were introduced to me by the following peers:
