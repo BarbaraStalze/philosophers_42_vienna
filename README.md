@@ -1,4 +1,4 @@
-*This project has been created as partC of the 42 curriculum by bastalze.*
+*This project has been created as part of the 42 curriculum by bastalze.*
 
 # philosophers
 
@@ -9,16 +9,25 @@ They eat, then sleep, then think.
 They have a fixed amount of time for eating, sleeping and until they die if they don't start eating or if this amount of time has passed since they last started eating.
 They should avoid dying. In case a minimum amount of times eaten is passed as an argument they shouldn't die before all are done.
 ### Goal
-The project tought me about threads, data races, timing of processes and mutexes.
+The project tought me about threads, data races, context switching and mutexes.
 ### Detailed description
 The first and last philosopher sit next to each other. Also the first sits next to the second the second next to the third and so on (if there are more than 3 of course).
 The message of the death of a philosopher appears maximum 10 milliseconds after his actual death.
-There is a separate thread for each philosopher and one for the observer.
+There is a separate thread for each philosopher. The monitor watches from the main thread.
 Mutexes are used in order to avoid data races and mixed output messages.
-In order to avoid a deadlock (each philosopher holding one chopstick and all starving) each oddly numbered philosopher takes first the chopsick to his left and then the one to his right. Each even philospher first takes the one to his right.
+In order to avoid a deadlock (each philosopher holding one chopstick and all starving) each oddly numbered philosopher takes first the chopsick to his left and then the one to his right. Each even philospher first takes the one to his right. Also on simulation start the even philosophers start eating first. That creates a staggering. Uneven go second and the first philosopher eats third in case of uneven numbers of philosophers.
 
 ## Instructions
 To run the program go to the root directory philosophers/ and there you run `make` and then ./philo with the arguments like discribed below.
+In order to not die the time to die needs to be more than three times the time to eat for an uneven amount of philosophers and more than two times the time to eat for an even amount of philosophers:
+
+> time_to_die > 3x time_to_eat -> n_philosophers % 2 = 1
+
+> time_to_die > 2x time_to_eat -> n_philosophers % 2 = 0
+
+If that is not true philosophers should die.
+The bigger the amount of philosophers the bigger the time to die has to be in order to provide enough buffer for context switching.
+With the input of 199 601 200 200 the one millisecond leeway might not be enough.
 
 ### Arguments
 This program takes 5 to 6 arguments:
@@ -57,8 +66,15 @@ Which timestamp (in milliseconds) which philosopher...
 - [Philosophers Visualizer](https://rom98759.github.io/Philosophers-visualizer/)
 
 ### Peers
-I talked to Kian and Myron about their approaches. They told me that using a string with bools that shows if a fork is used would be counted as communication between philosophers which isn't allowed. Kian inspired my waiting_for_all. Felix inspired my way of not printing messages after someone died. Stefan inspred me in the way how he has a flexible amount of sleep depending on how far away from the time to change state is and his neat way of using defines for the messages.
+The following concepts were introduced to me by the following peers:
+- What communication between philosophers means - if they knew who has which fork (Kian, Myron)
+- Concept that all philosophers have to wait for all of the others to be ready (Kian)
+- Making it impossible for anyone to print after a philosopher died (Felix K.)
+- Creating a function that makes usleep flexible depending on the time left to sleep (Stefan A.)
+- Calculating how long the minimum amount of thinking time in different scenarios have to be (Stefan A.)
+- Using only one mutex aside from the forks to avoid dependecies (Kian)
+- Context switching and how it can be manipulated eg. in the monitor (Kian)
+Thank you for your help and inspiration!
 
 ### AI Usage Statement
-- discussion of concepts and ideas
-- 
+Discussion of concepts and ideas with chat.deepseek.com
