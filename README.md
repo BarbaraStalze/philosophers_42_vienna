@@ -53,7 +53,8 @@ Which timestamp (in milliseconds) which philosopher...
 - [Mutex lock for Linux Thread Synchronization] (https://www.geeksforgeeks.org/linux-unix/mutex-lock-for-linux-thread-synchronization/)
 - [Usleep in Linux](https://linuxvox.com/blog/linux-usleep/)
 - [Using gettimeofday for Computing Execution Time](https://devgex.com/en/article/00035289)
-
+- [42philogramm](https://github.com/sugoidesune/42philogramm)
+- [Philosophers Visualizer](https://rom98759.github.io/Philosophers-visualizer/)
 
 ### Peers
 I talked to Kian and Myron about their approaches. They told me that using a string with bools that shows if a fork is used would be counted as communication between philosophers which isn't allowed. Kian inspired my waiting_for_all. Felix inspired my way of not printing messages after someone died. Stefan inspred me in the way how he has a flexible amount of sleep depending on how far away from the time to change state is and his neat way of using defines for the messages.

@@ -9,6 +9,8 @@ SOURCES = main.c \
 		initiate_mutexes.c \
 		initiate_philosophers.c \
 		philosophers.c \
+		thinking_helpers.c \
+		chopstick_helpers.c \
 		first_meal_ifs.c \
 		flexsleep.c \
 		eat_sleep_think.c \

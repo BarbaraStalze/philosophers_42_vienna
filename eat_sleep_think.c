@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/17 13:47:37 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:31:23 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,6 @@ int	sleeping(t_philo_data *p_data)
 	return (0);
 }
 
-int	calc_think_time(t_general_data *data, t_philo_data *p_data, int64_t	remaining)
-{
-	//int64_t	elapsed;
-	int64_t	think_time;
-
-	(void)p_data;
-	// elapsed = get_time() - p_data->start_of_last_meal;
-	// remaining = data->time_to_die - elapsed;
-	think_time = data->time_to_eat - data->time_to_sleep;
-	if (think_time < 0)
-		return (100);
-	return (((think_time + remaining) / 2) * 1000 + 100);
-}
-
 int	thinking(t_philo_data *p_data)
 {
 	int64_t	start_of_thinking;
@@ -75,32 +61,13 @@ int	thinking(t_philo_data *p_data)
 	start_of_thinking = get_time();
 	if (print_msg(THINKING, p_data))
 		return (1);
-	time_left = p_data->data->time_to_die - (get_time() - p_data->start_of_last_meal);
+	time_left = p_data->data->time_to_die - (get_time()
+			- p_data->start_of_last_meal);
 	chill_time = time_left;
 	if (time_left > 0)
-	{
-		// if (p_data->data->n_philosophers % 2 == 0)
-		// 	usleep(100);
-		// else
-			usleep(calc_think_time(p_data->data, p_data, time_left));
-	}
+		usleep(calc_think_time(p_data->data, p_data, time_left));
 	if (try_to_pick_up_chopsticks(p_data))
 		return (1);
-	return (0);
-}
-
-static int	try_to_pick_up_chopsticks(t_philo_data *p_data)
-{
-	if (p_data->id % 2 == 0)
-	{
-		if (grab_chopsticks_even(p_data))
-			return (1);
-	}
-	else
-	{
-		if (grab_chopsticks_uneven(p_data))
-			return (1);
-	}
 	return (0);
 }
 

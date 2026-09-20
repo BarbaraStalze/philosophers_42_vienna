@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:47:57 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/15 15:34:38 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:31:49 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_philo_data
 
 // general
 int		initiate_general_data(char **av, t_general_data *data);
-int		initiate_mutexes(t_general_data *data);
+int		initiate_mutex(t_general_data *data);
 int		initiate_philosophers(t_general_data *data, t_philo_data **p_data);
 void	*philosopher(void *arg);
 int		eating(t_philo_data *p_data);
@@ -88,6 +88,11 @@ int		thinking(t_philo_data *p_data);
 // cleanups
 void	cleanup(t_general_data *data, t_philo_data *p_data);
 //void	free_thread_p_data(t_mutex_thread_data *mt_data, t_philo_data *p_data);
+
+//thinking_helpers
+int		calc_think_time(t_general_data *data, t_philo_data *p_data,
+			int64_t	remaining);
+int		try_to_pick_up_chopsticks(t_philo_data *p_data);
 
 // helpers
 int		malloc_and_initialize(void **data, size_t size);

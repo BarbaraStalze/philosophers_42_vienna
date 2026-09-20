@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/16 17:26:28 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:36:03 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,16 @@ static int	wait_for_all(t_philo_data *p_data)
 	while (42)
 	{
 		pthread_mutex_lock(&p_data->data->start_o_end);
+		if (p_data->data->simulation_end == true)
+		{
+			pthread_mutex_unlock(&p_data->data->start_o_end);
+			return (1);
+		}
 		if (p_data->data->alive == p_data->data->n_philosophers)
 		{
 			pthread_mutex_unlock(&p_data->data->start_o_end);
 			break ;
 		}
-		// {
-		// 	p_data->start_of_last_meal = p_data->data->sim_start;
-		// 	return (pthread_mutex_unlock(&p_data->data->start_o_end), 0);
-		// }
 		pthread_mutex_unlock(&p_data->data->start_o_end);
 		if (check_for_end(p_data))
 			return (1);
@@ -79,7 +80,6 @@ static int	wait_for_all(t_philo_data *p_data)
 	}
 	p_data->start_of_last_meal = p_data->data->sim_start;
 	return (0);
-	
 }
 
 static int	first_grab(t_philo_data *p_data)
@@ -89,13 +89,6 @@ static int	first_grab(t_philo_data *p_data)
 		if (grab_chopsticks_even(p_data))
 			return (1);
 	}
-	// else if (uneven_philos_without_last(p_data))
-	// {
-	// 	if (first_grab_wait(p_data, false))
-	// 		return (1);
-	// 	if (grab_chopsticks_uneven(p_data))
-	// 		return (1);
-	// }
 	else
 	{
 		if (first_grab_wait(p_data, false))
@@ -108,8 +101,7 @@ static int	first_grab(t_philo_data *p_data)
 
 // Even philosophers start by grabbing the left fork first and then the right,
 // uneven philos grab the right fork first after sleeping almost the amount of
-// time of time_to_eat. The last uneven philosopher in case of an uneven amount
-// of philosophers waits almost twice the time_to_eat until grabbing forks.
+// time of time_to_eat.
 
 static int	first_grab_wait(t_philo_data *p_data, bool last)
 {
@@ -117,10 +109,6 @@ static int	first_grab_wait(t_philo_data *p_data, bool last)
 
 	(void)last;
 	remaining_time = p_data->data->time_to_eat / 2;
-	// else
-	// {
-	// 	remaining_time = p_data->data->time_to_eat * 2;
-	// }
 	while (remaining_time > 1)
 	{
 		if (check_for_end(p_data))
