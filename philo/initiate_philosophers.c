@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:06:37 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/18 15:37:50 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 11:28:23 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	initiate_philosophers(t_general_data *data,
 {
 	if (malloc_and_initialize((void **)(p_data), sizeof(t_philo_data)
 		* data->n_philosophers))
-		return (1);
+		return (pthread_mutex_destroy(&data->start_o_end), 1);
 	if (initiate_chopsticks(*p_data, data->n_philosophers))
-		return (1);
+		return (pthread_mutex_destroy(&data->start_o_end), free(p_data), 1);
 	if (create_threads(data, *p_data))
-		return (1);
+		return (destroy_mutexes(data, *p_data), free(p_data), 1);
 	return (0);
 }
 

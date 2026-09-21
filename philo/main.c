@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:48:17 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/20 10:44:11 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 11:23:51 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 		if (initiate_mutex(&data))
 			return (1);
 		if (initiate_philosophers(&data, &p_data))
-			return (cleanup(&data, p_data), 1);
+			return (1);
 		monitor(&data, p_data);
 		join_threads(p_data, data.n_philosophers);
 		cleanup(&data, p_data);
