@@ -32,6 +32,11 @@ clean:
 fclean:clean
 	rm -f $(NAME)
 
-re:fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
-.PHONY: all clean fclean re debug
+# With re written like this, it is safe to use re -j (unlike "re: fclean all") and the compilation inside 'all' runs in
+# parallel across all CPU cores which makes it much faster
+
+.PHONY: all clean fclean re
