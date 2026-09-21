@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 12:40:09 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 11:21:39 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:17:21 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	destroy_mutexes(t_general_data *data, t_philo_data *p_data)
 		pthread_mutex_destroy(&p_data[i].chopstick);
 		i++;
 	}
-	pthread_mutex_destroy(&data->start_o_end);
+	pthread_mutex_destroy(&data->theone);
 }
 
 void	cleanup(t_general_data *data, t_philo_data *p_data)

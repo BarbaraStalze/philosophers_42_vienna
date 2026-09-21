@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:48:17 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 12:24:10 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:17:51 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	monitor(t_general_data *data, t_philo_data *p_data)
 		i = -1;
 		while (++i < data->n_philosophers)
 		{
-			pthread_mutex_lock(&data->start_o_end);
+			pthread_mutex_lock(&data->theone);
 			if (p_data[i].start_of_last_meal + p_data[i].data->time_to_die
 				<= get_time())
 			{
@@ -63,8 +63,8 @@ static void	monitor(t_general_data *data, t_philo_data *p_data)
 				&& data->philos_ate_enough == data->n_philosophers)
 				data->simulation_end = true;
 			if (data->simulation_end == true)
-				return ((void)pthread_mutex_unlock(&data->start_o_end));
-			pthread_mutex_unlock(&data->start_o_end);
+				return ((void)pthread_mutex_unlock(&data->theone));
+			pthread_mutex_unlock(&data->theone);
 		}
 		usleep(50);
 	}
@@ -74,13 +74,13 @@ static void	wait_for_philos(t_general_data *data)
 {
 	while (42)
 	{
-		pthread_mutex_lock(&data->start_o_end);
+		pthread_mutex_lock(&data->theone);
 		if (data->alive == data->n_philosophers)
 		{
-			pthread_mutex_unlock(&data->start_o_end);
+			pthread_mutex_unlock(&data->theone);
 			break ;
 		}
-		pthread_mutex_unlock(&data->start_o_end);
+		pthread_mutex_unlock(&data->theone);
 		usleep(200);
 	}
 	usleep(500);

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:47:57 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 12:43:10 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:17:54 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_general_data
 	int					philos_ate_enough;
 	bool				simulation_end;
 	pthread_mutex_t		print;
-	pthread_mutex_t		start_o_end;
+	pthread_mutex_t		theone;
 }		t_general_data;
 
 typedef struct s_philo_data

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:15:16 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 11:59:38 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:17:37 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	check_for_end(t_philo_data *p_data)
 	int	check;
 
 	check = 0;
-	pthread_mutex_lock(&p_data->data->start_o_end);
+	pthread_mutex_lock(&p_data->data->theone);
 	if (p_data->data->simulation_end == true)
 		check = 1;
-	pthread_mutex_unlock(&p_data->data->start_o_end);
+	pthread_mutex_unlock(&p_data->data->theone);
 	return (check);
 }
 
@@ -50,10 +50,10 @@ int64_t	time_since_start(t_philo_data *p_data)
 
 int	print_msg(char *msg, t_philo_data *p_data)
 {
-	pthread_mutex_lock(&p_data->data->start_o_end);
+	pthread_mutex_lock(&p_data->data->theone);
 	if (p_data->data->simulation_end == true)
-		return (pthread_mutex_unlock(&p_data->data->start_o_end), 1);
+		return (pthread_mutex_unlock(&p_data->data->theone), 1);
 	printf("%ld %d %s\n", time_since_start(p_data), p_data->id, msg);
-	pthread_mutex_unlock(&p_data->data->start_o_end);
+	pthread_mutex_unlock(&p_data->data->theone);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 12:10:30 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/18 12:52:41 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:17:39 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	initiate_mutex(t_general_data *data)
 {
-	if (pthread_mutex_init(&data->start_o_end, NULL))
+	if (pthread_mutex_init(&data->theone, NULL))
 		return (1);
 	return (0);
 }

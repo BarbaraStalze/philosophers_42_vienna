@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 10:35:50 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/20 11:50:05 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:17:29 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	eating(t_philo_data *p_data)
 {
 	if (get_time() - p_data->start_of_last_meal >= p_data->data->time_to_die)
 		usleep(500);
-	pthread_mutex_lock(&p_data->data->start_o_end);
+	pthread_mutex_lock(&p_data->data->theone);
 	p_data->start_of_last_meal = get_time();
-	pthread_mutex_unlock(&p_data->data->start_o_end);
+	pthread_mutex_unlock(&p_data->data->theone);
 	if (print_msg(EATING, p_data))
 		return (drop_chopsticks(p_data), 1);
 	if (allert_waiting(p_data, p_data->data->time_to_eat,
@@ -32,9 +32,9 @@ int	eating(t_philo_data *p_data)
 	if (p_data->data->minimum_meals
 		&& p_data->times_eaten == p_data->data->minimum_meals)
 	{
-		pthread_mutex_lock(&p_data->data->start_o_end);
+		pthread_mutex_lock(&p_data->data->theone);
 		p_data->data->philos_ate_enough++;
-		pthread_mutex_unlock(&p_data->data->start_o_end);
+		pthread_mutex_unlock(&p_data->data->theone);
 	}
 	return (0);
 }

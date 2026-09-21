@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/18 15:36:03 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:18:04 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	*philosopher(void *arg)
 
 static void	lonely_fucker(t_philo_data *p_data)
 {
-	pthread_mutex_lock(&p_data->data->start_o_end);
+	pthread_mutex_lock(&p_data->data->theone);
 	p_data->data->sim_start = get_time();
 	p_data->start_of_last_meal = p_data->data->sim_start;
 	p_data->data->alive++;
-	pthread_mutex_unlock(&p_data->data->start_o_end);
+	pthread_mutex_unlock(&p_data->data->theone);
 	pthread_mutex_lock(&p_data->chopstick);
 	print_msg(CHOPSTICK, p_data);
 	pthread_mutex_unlock(&p_data->chopstick);
@@ -55,25 +55,25 @@ static void	lonely_fucker(t_philo_data *p_data)
 
 static int	wait_for_all(t_philo_data *p_data)
 {
-	pthread_mutex_lock(&p_data->data->start_o_end);
+	pthread_mutex_lock(&p_data->data->theone);
 	p_data->data->alive++;
 	if (p_data->data->alive == p_data->data->n_philosophers)
 		p_data->data->sim_start = get_time();
-	pthread_mutex_unlock(&p_data->data->start_o_end);
+	pthread_mutex_unlock(&p_data->data->theone);
 	while (42)
 	{
-		pthread_mutex_lock(&p_data->data->start_o_end);
+		pthread_mutex_lock(&p_data->data->theone);
 		if (p_data->data->simulation_end == true)
 		{
-			pthread_mutex_unlock(&p_data->data->start_o_end);
+			pthread_mutex_unlock(&p_data->data->theone);
 			return (1);
 		}
 		if (p_data->data->alive == p_data->data->n_philosophers)
 		{
-			pthread_mutex_unlock(&p_data->data->start_o_end);
+			pthread_mutex_unlock(&p_data->data->theone);
 			break ;
 		}
-		pthread_mutex_unlock(&p_data->data->start_o_end);
+		pthread_mutex_unlock(&p_data->data->theone);
 		if (check_for_end(p_data))
 			return (1);
 		usleep(100);

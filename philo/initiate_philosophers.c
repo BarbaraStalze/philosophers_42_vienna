@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:06:37 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 11:28:23 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 17:17:43 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	initiate_philosophers(t_general_data *data,
 {
 	if (malloc_and_initialize((void **)(p_data), sizeof(t_philo_data)
 		* data->n_philosophers))
-		return (pthread_mutex_destroy(&data->start_o_end), 1);
+		return (pthread_mutex_destroy(&data->theone), 1);
 	if (initiate_chopsticks(*p_data, data->n_philosophers))
-		return (pthread_mutex_destroy(&data->start_o_end), free(p_data), 1);
+		return (pthread_mutex_destroy(&data->theone), free(p_data), 1);
 	if (create_threads(data, *p_data))
 		return (destroy_mutexes(data, *p_data), free(p_data), 1);
 	return (0);
@@ -78,9 +78,9 @@ static int	create_threads(t_general_data *data,
 		if (pthread_create(&p_data[i].thread_id, NULL, philosopher,
 				(void *)&p_data[i]))
 		{
-			pthread_mutex_lock(&p_data->data->start_o_end);
+			pthread_mutex_lock(&p_data->data->theone);
 			data->simulation_end = true;
-			pthread_mutex_unlock(&p_data->data->start_o_end);
+			pthread_mutex_unlock(&p_data->data->theone);
 			join_threads(p_data, i);
 			return (1);
 		}
