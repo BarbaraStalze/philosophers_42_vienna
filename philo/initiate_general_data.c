@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 11:53:10 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/15 10:08:27 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 12:24:26 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	initiate_general_data(char **av, t_general_data *data)
 		while (av[i][j])
 		{
 			if (!ft_isdigit(av[i][j]))
-				return (printf("Argument is not a number"), 1);
+				return (printf("Argument is not a positive number\n"), 1);
 			j++;
 		}
 		i++;
@@ -81,7 +81,7 @@ static int	char_to_int(const char *nptr)
 	{
 		rtrn = rtrn * 10 + (nptr[i] - 48);
 		if (rtrn > INT_MAX)
-			return (printf("Argument is bigger than INT_MAX"), -1);
+			return (printf("Argument is bigger than INT_MAX\n"), -1);
 		i++;
 	}
 	return ((int)rtrn);

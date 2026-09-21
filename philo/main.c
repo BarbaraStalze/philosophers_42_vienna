@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:48:17 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 11:23:51 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 12:24:10 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		printf("Error: Incorrect amount of arguments");
+		printf("Error: Incorrect amount of arguments\n");
 		return (1);
 	}
 }
