@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 17:47:57 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 11:27:31 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/21 12:43:10 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,6 @@ typedef struct s_general_data
 	pthread_mutex_t		print;
 	pthread_mutex_t		start_o_end;
 }		t_general_data;
-
-// typedef struct s_mutex_thread_data
-// {
-// 	pthread_mutex_t		print;
-// 	bool				print_initailized;
-// 	pthread_mutex_t		start;
-// 	bool				start_initailized;
-// 	pthread_mutex_t		died;
-// 	bool				died_initailized;
-// 	pthread_mutex_t		ate_enough;
-// 	bool				ate_enough_initailized;
-// 	pthread_mutex_t		end;
-// 	bool				end_initailized;
-// 	pthread_mutex_t		*chopsticks;
-// 	bool				*chopsticks_initialized;
-// 	pthread_t			*id;
-// 	bool				*thread_created;
-// }		t_mutex_thread_data;
 
 typedef struct s_philo_data
 {

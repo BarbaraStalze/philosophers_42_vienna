@@ -3,7 +3,6 @@
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
-#TSAN_OPTIONS = second_deadlock_stack=1
 SOURCES = main.c \
 		initiate_general_data.c \
 		initiate_mutexes.c \
