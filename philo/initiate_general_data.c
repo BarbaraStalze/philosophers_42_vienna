@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 11:53:10 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 12:24:26 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/22 14:55:56 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	initiate_general_data(char **av, t_general_data *data)
 		while (av[i][j])
 		{
 			if (!ft_isdigit(av[i][j]))
-				return (printf("Argument is not a positive number\n"), 1);
+				return (printf("Error: Argument is not a \
+					positive number\n"), 1);
 			j++;
 		}
 		i++;
@@ -42,8 +43,11 @@ int	initiate_general_data(char **av, t_general_data *data)
 static int	add_args(char **av, t_general_data *data)
 {
 	data->n_philosophers = char_to_int(av[1]);
-	if (data->n_philosophers == -1)
+	if (data->n_philosophers == -1 || data->n_philosophers == 0)
 		return (1);
+	if (data->n_philosophers > 200)
+		return (printf("Error: You shall not test with more \
+			than 200 philos\n"), 1);
 	data->time_to_die = char_to_int(av[2]);
 	if (data->time_to_die == -1)
 		return (1);
@@ -81,7 +85,7 @@ static int	char_to_int(const char *nptr)
 	{
 		rtrn = rtrn * 10 + (nptr[i] - 48);
 		if (rtrn > INT_MAX)
-			return (printf("Argument is bigger than INT_MAX\n"), -1);
+			return (printf("Error: Argument is bigger than INT_MAX\n"), -1);
 		i++;
 	}
 	return ((int)rtrn);

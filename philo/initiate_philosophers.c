@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 13:06:37 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 17:17:43 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/22 16:52:14 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	initiate_philosophers(t_general_data *data,
 		* data->n_philosophers))
 		return (pthread_mutex_destroy(&data->theone), 1);
 	if (initiate_chopsticks(*p_data, data->n_philosophers))
-		return (pthread_mutex_destroy(&data->theone), free(p_data), 1);
+		return (pthread_mutex_destroy(&data->theone), free(*p_data), 1);
 	if (create_threads(data, *p_data))
-		return (destroy_mutexes(data, *p_data), free(p_data), 1);
+		return (destroy_mutexes(data, *p_data), free(*p_data), 1);
 	return (0);
 }
 

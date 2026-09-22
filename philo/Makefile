@@ -2,7 +2,7 @@
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread #-g -fsanitize=thread
 SOURCES = main.c \
 		initiate_general_data.c \
 		initiate_mutexes.c \
@@ -36,7 +36,7 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
-# With re written like this, it is safe to use re -j (unlike "re: fclean all") and the compilation inside 'all' runs in
-# parallel across all CPU cores which makes it much faster
+# With re written like this, it is safe to use re -j (unlike "re: fclean all"). With -j the compilation inside 'all' runs in
+# parallel across all CPUs which makes it much faster
 
 .PHONY: all clean fclean re
