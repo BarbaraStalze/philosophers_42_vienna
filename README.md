@@ -80,4 +80,4 @@ The following concepts were introduced to me by the following peers:
 Thank you for your help and inspiration!
 
 ### AI Usage Statement
-Discussion of concepts and ideas with chat.deepseek.com
+Discussion of concepts and ideas with [deepseek](https://chat.deepseek.com/).
