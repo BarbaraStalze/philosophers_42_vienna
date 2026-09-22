@@ -6,7 +6,7 @@
 /*   By: bastalze <bastalze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 14:48:31 by bastalze          #+#    #+#             */
-/*   Updated: 2026/09/21 17:18:04 by bastalze         ###   ########.fr       */
+/*   Updated: 2026/09/22 12:31:12 by bastalze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	wait_for_all(t_philo_data *p_data)
 		}
 		if (p_data->data->alive == p_data->data->n_philosophers)
 		{
+			p_data->start_of_last_meal = p_data->data->sim_start;
 			pthread_mutex_unlock(&p_data->data->theone);
 			break ;
 		}
@@ -78,7 +79,6 @@ static int	wait_for_all(t_philo_data *p_data)
 			return (1);
 		usleep(100);
 	}
-	p_data->start_of_last_meal = p_data->data->sim_start;
 	return (0);
 }
 
